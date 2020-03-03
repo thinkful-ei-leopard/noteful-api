@@ -23,14 +23,6 @@ folderRouter
     .post(jsonParser, (req, res, next) => {
         const newFolder = { name: req.body.name }
 
-        // if(!name) {
-        //     return res
-        //         .status(400)
-        //         .json({
-        //             error: { message: `a name must be provided` }
-        //         })
-        // }
-
         FolderService.insertFolder(req.app.get('knexInstance'), newFolder)
             .then(folder => {
                 res.status(201).location(path.posix.join(req.originalUrl + `/${folder.id}`)).json(folder)
